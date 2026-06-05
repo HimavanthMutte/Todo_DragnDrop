@@ -12,8 +12,10 @@ const ListItem = ({ data }) =>{
     }
 
     return(
-        <li {...attributes} style={style} ref={setNodeRef} key={data.id} className="flex flex-row gap-3 items-center hover:bg-indigo-500 hover:text-white transition-colors border border-slate-400 shadow-md rounded-md p-5 w-full">
-            <RxHamburgerMenu {...listeners} className="cursor-move"/>
+        <li style={style} ref={setNodeRef} key={data.id} className="bg-white flex flex-row gap-3 items-center hover:bg-indigo-500 hover:text-white transition-colors border border-slate-400 shadow-md rounded-md p-5 w-full">
+            <div {...attributes} {...listeners} className="cursor-move">
+                <RxHamburgerMenu/>
+            </div>
             <h1>{data.title}</h1>
         </li>
     )

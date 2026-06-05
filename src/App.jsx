@@ -2,7 +2,8 @@ import ListItem  from "./components/ListItem"
 
 import { SortableContext , arrayMove } from "@dnd-kit/sortable"
 
-import { DndContext, closestCorners } from "@dnd-kit/core"
+import { DndContext, closestCorners , useSensor , useSensors , MouseSensor , KeyboardSensor , TouchSensor } from "@dnd-kit/core"
+import { sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 
 import { useState } from "react"
 
@@ -22,10 +23,23 @@ const App = () =>{
     setItems(prev=>arrayMove(listItems,oldIndex,newIndex))
   }
 
+  const sensors = useSensors(
+    useSensor(MouseSensor),
+    useSensor(KeyboardSensor,{
+      coordinateGetter: sortableKeyboardCoordinates
+    }),
+    useSensor(TouchSensor,{
+      activationConstraint:{
+        delay:100,
+        tolerance:5
+      }
+    })
+  )
+
   return (
     <div className="min-h-screen bg-indigo-500 p-5">
       <h1 className="text-white text-center text-3xl font-bold">To Do List</h1>
-      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd} sensors={sensors}>
         <SortableContext items={listItems} >
           <ul className="flex flex-col gap-5 bg-white p-5 mt-5 rounded-md max-w-[600px] m-auto shadow-xl">
             {listItems.map(item=>{
