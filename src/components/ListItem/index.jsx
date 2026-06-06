@@ -17,7 +17,7 @@ const ListItem = ({ data }) =>{
 
     return(
         <li style={style} ref={setNodeRef} key={data.id} className={`flex flex-row gap-3 transition-colors items-center border border-slate-400 shadow-md rounded-md p-5 w-full ${isActive ? "bg-indigo-500 text-white" : "bg-white"}`}>
-            <div {...attributes} {...listeners} style={{ cursor: active ? "grabbing" : "grab" }}>
+            <div {...attributes} {...listeners} style={{ cursor: active ? "grabbing z-10" : "grab" }}>
                 <RxHamburgerMenu/>
             </div>
             <h1>{data.title}</h1>
