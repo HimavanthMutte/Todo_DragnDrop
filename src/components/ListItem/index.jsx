@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { RxHamburgerMenu } from "react-icons/rx";
-
+import { useDndContext } from "@dnd-kit/core";
 
 
 const ListItem = ({ data }) =>{
@@ -11,9 +11,13 @@ const ListItem = ({ data }) =>{
         transition
     }
 
+    const { active } = useDndContext();
+
+    const isActive = active?.id === data.id;
+
     return(
-        <li style={style} ref={setNodeRef} key={data.id} className="bg-white flex flex-row gap-3 items-center hover:bg-indigo-500 hover:text-white transition-colors border border-slate-400 shadow-md rounded-md p-5 w-full">
-            <div {...attributes} {...listeners} className="cursor-move">
+        <li style={style} ref={setNodeRef} key={data.id} className={`flex flex-row gap-3 transition-colors items-center border border-slate-400 shadow-md rounded-md p-5 w-full ${isActive ? "bg-indigo-500 text-white" : "bg-white"}`}>
+            <div {...attributes} {...listeners} style={{ cursor: active ? "grabbing" : "grab" }}>
                 <RxHamburgerMenu/>
             </div>
             <h1>{data.title}</h1>
