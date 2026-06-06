@@ -42,7 +42,7 @@ const App = () =>{
       <h1 className="text-white text-center text-3xl font-bold">To Do List</h1>
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd} sensors={sensors}>
         <SortableContext items={listItems} strategy={rectSortingStrategy}>
-          <ul className="flex flex-col gap-5 bg-white p-5 mt-5 rounded-md max-w-[700px] m-auto shadow-xl grid grid-cols-2 gap-4">
+          <ul className="overflow-hidden flex flex-col gap-5 bg-white p-5 mt-5 rounded-md max-w-[700px] m-auto shadow-xl grid grid-cols-2 gap-4">
             {listItems.map(item=>{
               return (
                   <ListItem data={item}/>
